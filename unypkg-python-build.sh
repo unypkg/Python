@@ -19,6 +19,8 @@ GH_TOKEN="$(cat GH_TOKEN)"
 export GH_TOKEN
 
 source /uny/uny/build/github_conf
+source /uny/uny/build/download_functions
+source /uny/git/unypkg/fn
 
 ######################################################################################################################
 ### Timestamp & Download
@@ -26,7 +28,6 @@ source /uny/uny/build/github_conf
 uny_build_date_seconds_now="$(date +%s)"
 uny_build_date_now="$(date -d @"$uny_build_date_seconds_now" +"%Y-%m-%dT%H.%M.%SZ")"
 
-source /uny/uny/build/download_functions
 mkdir -pv /uny/sources
 cd /uny/sources || exit
 
@@ -41,7 +42,9 @@ latest_commit_id="$(echo "$latest_head" | cut --fields=1)"
 
 ### Check if the build should be continued
 version_details
-#[[ ! -f /uny/sources/vdet-"$pkgname"-new ]] && echo "No newer version needs to be built." && exit
+
+# Release package no matter what:
+echo "newer" >release-"$pkgname"
 
 check_for_repo_and_create
 git_clone_source_repo
@@ -86,21 +89,4 @@ UNYEOF
 ######################################################################################################################
 ### Packaging
 
-cd /uny/pkg || exit
-for pkg in /uny/sources/vdet-*-new; do
-    vdet_content="$(cat "$pkg")"
-    vdet_new_file="$pkg"
-    pkg="$(echo "$pkg" | grep -Eo "vdet.*new$" | sed -e "s|vdet-||" -e "s|-new||")"
-    pkgv="$(echo "$vdet_content" | head -n 1)"
-
-    cp "$vdet_new_file" "$pkg"/"$pkgv"/vdet
-
-    source_archive_orig="$(echo /uny/sources/"$pkg"-"$pkgv".tar.*)"
-    source_archive_new="$(echo "$source_archive_orig" | sed -r -e "s|^.*/||" -e "s|(\.tar.*$)|-source\1|")"
-    cp -a "$source_archive_orig" "$source_archive_new"
-    cp -a /uny/uny/build/logs/"$pkg"-*.log "$pkg"-build.log
-    XZ_OPT="-9 --threads=0" tar -cJpf unypkg-"$pkg".tar.xz "$pkg"
-
-    gh -R unypkg/"$pkg" release create "$pkgv"-"$uny_build_date_now" --generate-notes \
-        "$pkg/$pkgv/vdet#vdet - $vdet_content" unypkg-"$pkg".tar.xz "$pkg"-build.log "$source_archive_new"
-done
+package_unypkg
