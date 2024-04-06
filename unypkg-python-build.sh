@@ -68,7 +68,7 @@ get_include_paths_temp
 ####################################################
 ### Start of individual build script
 
-openssl_dir=(/uny/pkg/openssl/*/)
+openssl_dir=(/uny/pkg/openssl/*)
 
 unset LD_RUN_PATH
 ./configure --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
