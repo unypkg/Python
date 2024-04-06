@@ -68,12 +68,14 @@ get_include_paths_temp
 ####################################################
 ### Start of individual build script
 
+openssl_dir=(/uny/pkg/openssl/*/)
+
 unset LD_RUN_PATH
 ./configure --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
     --enable-shared \
     --with-system-expat \
     --enable-optimizations \
-    --with-ssl
+    --with-openssl="${openssl_dir[0]}"
 
 make -j"$(nproc)"
 make install
