@@ -70,9 +70,12 @@ get_include_paths_temp
 ### Start of individual build script
 
 openssl_dir=(/uny/pkg/openssl/*)
+libffi_include_dir=(/uny/pkg/libffi/*/lib/pkgconfig)
 
-unset LD_RUN_PATH
-./configure --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
+#unset LD_RUN_PATH
+
+./configure PKG_CONFIG_PATH="${libffi_include_dir[0]}" \
+    --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
     --enable-shared \
     --with-system-expat \
     --enable-optimizations \
