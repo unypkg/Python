@@ -56,7 +56,7 @@ archiving_source
 ### Build
 
 # unyc - run commands in uny's chroot environment
-unyc <<"UNYEOF"
+unyc #<<"UNYEOF"
 set -xv
 source /uny/build/functions
 
@@ -83,6 +83,11 @@ libffi_include_dir=(/uny/pkg/libffi/*/lib/pkgconfig)
 
 make -j"$(nproc)"
 make install
+
+cd /uny/pkg/python/*/bin || exit
+ln -sfv python3 python
+ln -sfv pip3 pip
+cd "$(echo $pkgname* | grep -Eio "$pkgname.[^0-9]*(([0-9]+\.)*[0-9]+)" | sort -u)" || exit
 
 ####################################################
 ### End of individual build script
