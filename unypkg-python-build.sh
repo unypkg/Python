@@ -56,7 +56,7 @@ archiving_source
 ### Build
 
 # unyc - run commands in uny's chroot environment
-unyc #<<"UNYEOF"
+unyc <<"UNYEOF"
 set -xv
 source /uny/build/functions
 
