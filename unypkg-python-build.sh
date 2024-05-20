@@ -63,7 +63,7 @@ pkgname="python"
 
 version_verbose_log_clean_unpack_cd
 get_env_var_values
-get_include_paths_temp
+get_include_paths
 
 ####################################################
 ### Start of individual build script
@@ -73,8 +73,9 @@ openssl_dir=(/uny/pkg/openssl/*)
 #libffi_include_dir=(/uny/pkg/libffi/*/lib/pkgconfig)
 
 #unset LD_RUN_PATH
+#PKG_CONFIG_PATH="${libffi_include_dir[0]}"
 
-./configure PKG_CONFIG_PATH="${libffi_include_dir[0]}" \
+./configure \
     --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
     --enable-shared \
     --with-system-expat \
