@@ -11,7 +11,7 @@ set -xv
 wget -qO- uny.nu/pkg | bash -s buildsys
 
 ### Installing build dependencies
-unyp install openssl libffi
+unyp install openssl libffi expat
 
 #pip3_bin=(/uny/pkg/python/*/bin/pip3)
 #"${pip3_bin[0]}" install meson
