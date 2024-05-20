@@ -79,7 +79,9 @@ get_pkgconfig_paths
     --enable-shared \
     --with-system-expat \
     --enable-optimizations \
-    --with-openssl="${openssl_dir[0]}"
+    --with-openssl
+    
+#    --with-openssl="${openssl_dir[0]}"
 
 make -j"$(nproc)"
 make install
