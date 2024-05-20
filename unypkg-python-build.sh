@@ -69,7 +69,7 @@ get_include_paths_temp
 ### Start of individual build script
 
 get_pkgconfig_paths
-#openssl_dir=(/uny/pkg/openssl/*)
+openssl_dir=(/uny/pkg/openssl/*)
 #libffi_include_dir=(/uny/pkg/libffi/*/lib/pkgconfig)
 
 #unset LD_RUN_PATH
@@ -78,9 +78,8 @@ get_pkgconfig_paths
     --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
     --enable-shared \
     --with-system-expat \
-    --enable-optimizations
-
-#    --with-openssl="${openssl_dir[0]}"
+    --enable-optimizations \
+    --with-openssl="${openssl_dir[0]}"
 
 make -j"$(nproc)"
 make install
