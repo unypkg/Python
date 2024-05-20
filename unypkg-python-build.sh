@@ -78,9 +78,8 @@ get_pkgconfig_paths
     --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
     --enable-shared \
     --with-system-expat \
-    --enable-optimizations \
-    --with-openssl
-    
+    --enable-optimizations
+
 #    --with-openssl="${openssl_dir[0]}"
 
 make -j"$(nproc)"
