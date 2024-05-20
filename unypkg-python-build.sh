@@ -68,8 +68,9 @@ get_include_paths_temp
 ####################################################
 ### Start of individual build script
 
-openssl_dir=(/uny/pkg/openssl/*)
-libffi_include_dir=(/uny/pkg/libffi/*/lib/pkgconfig)
+get_pkgconfig_paths
+#openssl_dir=(/uny/pkg/openssl/*)
+#libffi_include_dir=(/uny/pkg/libffi/*/lib/pkgconfig)
 
 #unset LD_RUN_PATH
 
