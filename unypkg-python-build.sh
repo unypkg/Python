@@ -88,7 +88,7 @@ make install
 cd /uny/pkg/python/*/bin || exit
 ln -sfv python3 python
 ln -sfv pip3 pip
-cd "$(echo $pkgname* | grep -Eio "$pkgname.[^0-9]*(([0-9]+\.)*[0-9]+)" | sort -u)" || exit
+#cd "$(echo $pkgname* | grep -Eio "$pkgname.[^0-9]*(([0-9]+\.)*[0-9]+)" | sort -u)" || exit
 
 ####################################################
 ### End of individual build script
