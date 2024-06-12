@@ -34,7 +34,7 @@ mkdir -pv /uny/sources
 cd /uny/sources || exit
 
 pkgname="python"
-pkggit="https://github.com/python/cpython.git refs/tags/v[0-9.]*"
+pkggit="https://github.com/python/cpython.git refs/tags/v2.7.18"
 gitdepth="--depth=1"
 
 ### Get version info from git remote
@@ -86,8 +86,8 @@ make -j"$(nproc)"
 make install
 
 cd /uny/pkg/python/*/bin || exit
-ln -sfv python3 python
-ln -sfv pip3 pip
+ln -sfv python2 python
+ln -sfv pip2 pip
 
 manual_deps=('expat' 'openssl' 'libffi')
 
