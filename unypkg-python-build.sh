@@ -79,9 +79,8 @@ openssl_dir=(/uny/pkg/openssl/*)
     --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
     --enable-shared \
     --with-system-expat \
+    --enable-optimizations \
     --with-openssl="${openssl_dir[0]}"
-
-#    --enable-optimizations \
 
 make -j"$(nproc)"
 make install
